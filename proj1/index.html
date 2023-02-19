@@ -23,49 +23,25 @@
 
 <body>
 
-<h1 align="middle">CS 184: Computer Graphics and Imaging, Spring 2018</h1>
+<h1 align="middle">CS 184: Computer Graphics and Imaging, Spring 2023</h1>
 <h1 align="middle">Project 1: Rasterizer</h1>
-<h2 align="middle">YOUR NAME, CS184-??</h2>
+<h2 align="middle">ANTHONY ZHANG, CS184-184-az</h2>
 
 <br><br>
 
 <div>
 
 <h2 align="middle">Overview</h2>
-<p>Give a high-level overview of what you implemented in this project. Think about what you've built as a whole. Share your thoughts on what interesting things you've learned from completing the project.</p>
+<p>In this project, I implemented a white variety of graphics concepts in C++. This included basic rasterization with an added supersampling feature, various figure transformations in homogeneous coordinates, barycentric coordinate interpolation, and various sampling techniques and optimizations for texture sampling. The final topic in particular included pixel sampling methods such as nearest neighbor and bilinear interpolation, and various level sampling methods such as nearest level and trilinear color interpolation.</p>
 
 <h2 align="middle">Section I: Rasterization</h2>
 
 <h3 align="middle">Part 1: Rasterizing single-color triangles</h3>
+<p>1. To rasterize a triangle, we need to know which pixels to illuminate and what color they should illuminate with. To do this efficiently, I calculated the bounding box of the triangle we are trying to rasterize by recording the minimum and maximum x and y values of the triangles vertices. This forms the bounding box of the triangle, which forms an upper bound on the number of pixels I need to check for rasterization. Then, I start in the top left pixel of the bounding box, and for each pixel I check whether it is inside the triangle or not by using the formula in class. Essentially, by calculating the dot product between the pixel and every vector normal to the sides of the triangle and seeing if these are all positive or all negative, I’m able to deduce if the point is in the intersection of the 3 half-planes formed by the triangles edges. If so, I then fill the sample_buffer with the appropriate color passed in.</p>
 
-<p>Here is an example 2x2 gridlike structure using an HTML table. Each <b>tr</b> is a row and each <b>td</b> is a column in that row. You might find this useful for framing and showing your result images in an organized fashion.</p>
+  <p>2.My algorithm is not any worse than one which checks each sample within the bounding box of a triangle. In actuality, it is the algorithm which does exactly that. There is no additional overhead calculation; my algorithm simply brute force checks every point in the bounding box.</p>
 
-<div align="middle">
-  <table style="width=100%">
-    <tr>
-      <td>
-        <img src="images/image1.png" align="middle" width="400px"/>
-        <figcaption align="middle">Caption goes here.</figcaption>
-      </td>
-      <td>
-        <img src="images/image2.png" align="middle" width="400px"/>
-        <figcaption align="middle">Caption goes here.</figcaption>
-      </td>
-    </tr>
-    <br>
-    <tr>
-      <td>
-        <img src="images/image3.png" align="middle" width="400px"/>
-        <figcaption align="middle">Caption goes here.</figcaption>
-      </td>
-      <td>
-        <img src="images/image4.png" align="middle" width="400px"/>
-        <figcaption align="middle">Caption goes here.</figcaption>
-      </td>
-    </tr>
-  </table>
-</div>
-
+<p>3. Some aliasing is happening on this red triangle!</p>
 
 <h3 align="middle">Part 2: Antialiasing triangles</h3>
 
