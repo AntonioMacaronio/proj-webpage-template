@@ -40,10 +40,10 @@
 <p>1. To rasterize a triangle, we need to know which pixels to illuminate and what color they should illuminate with. To do this efficiently, I calculated the bounding box of the triangle we are trying to rasterize by recording the minimum and maximum x and y values of the triangles vertices. This forms the bounding box of the triangle, which forms an upper bound on the number of pixels I need to check for rasterization. Then, I start in the top left pixel of the bounding box, and for each pixel I check whether it is inside the triangle or not by using the formula in class. Essentially, by calculating the dot product between the pixel and every vector normal to the sides of the triangle and seeing if these are all positive or all negative, I’m able to deduce if the point is in the intersection of the 3 half-planes formed by the triangles edges. If so, I then fill the sample_buffer with the appropriate color passed in.
 
 
-  <br>2. My algorithm is not any worse than one which checks each sample within the bounding box of a triangle. In actuality, it is the algorithm which does exactly that. There is no additional overhead calculation; my algorithm simply brute force checks every point in the bounding box.
+  <br><br>2. My algorithm is not any worse than one which checks each sample within the bounding box of a triangle. In actuality, it is the algorithm which does exactly that. There is no additional overhead calculation; my algorithm simply brute force checks every point in the bounding box.
 
 
-  <br>3. Some aliasing is happening on this red triangle!
+  <br><br>3. Some aliasing is happening on this red triangle!
   <img src="task1image1.png">
 </p>
 
@@ -51,14 +51,38 @@
 
 <h3 align="middle">Part 2: Antialiasing triangles</h3>
 <p>1. I had a very similar approach to task 1. Once again, I calculated the bounding box of a triangle, but then I looped through every ‘mini-pixel’ of the bounding box and checked if they were inside the triangle with the same formula. The mini-pixel’s coordinates were calculated by dividing the step size by the sample rate’s square root, and using that step size to iterate through the bounding box. If a mini-pixel was inside the triangle, then it’s position in the sample buffer was filled with the input color.
-
   <br>After the sample buffer was fully rendered, I downsampled it to generate the final frame buffer to be displayed. This was done by breaking down the sample-buffer into squares with side length sqrt(sample_rate), and for every mini-pixel in that square, we averaged the colors to calculate a final color to be rendered on the frame buffer location corresponding to the square of mini-pixels.
-
   <br>Supersampling is extremely useful in anti-aliasing. Aliasing occurs when there are very high frequencies or changes in color along the borders of a figure or wherever in general. To the human eye, pixels stick out, look rough, and are called ‘jaggies’. To combat this and generate more appealing images, we smooth out these boundaries by adjusting the intensity of a color on these high-frequency borders by averaging them out. Supersampling does this averaging of the color by calculating the proportion of ‘mini-pixels’ inside the triangle.
-
   <br>To modify the rasterization pipeline to do this, I simply added another double for-loop to sample all the mini-pixels in a larger pixel. This way, I was able to count the number of mini-pixels and calculate a proportion to base my weighted average on. By doing these averages for every pixel I was sampling, I was able to smooth out borders of high frequencies and thus, anti-alias my triangles.</p>
-<p>basic/test4.svg is pictured below with sample rate 1, 4, and 9 respectively:</p>
-  <img src="">
+
+  <br><br>2. basic/test4.svg is pictured below:
+
+  <p>basic/test4.svg is pictured below with sample rate 1, 4, and 9 respectively:</p>
+  <div align="middle">
+    <table style="width=100%">
+      <tr>
+        <td>
+          <img src="task2image1.png" align="middle" width="400px"/>
+          <figcaption align="middle">sample_rate = 1</figcaption>
+        </td>
+        <td>
+          <img src="images/image2.png" align="middle" width="400px"/>
+          <figcaption align="middle">sample_rate = 4</figcaption>
+        </td>
+      </tr>
+      <br>
+      <tr>
+        <td>
+          <img src="images/image3.png" align="middle" width="400px"/>
+          <figcaption align="middle">sample_rate = 16</figcaption>
+        </td>
+        <td>
+          <img src="images/image4.png" align="middle" width="400px"/>
+          <figcaption align="middle">Caption goes here.</figcaption>
+        </td>
+      </tr>
+    </table>
+  </div>
 <p>We can see that as the sample-rate increases, these ‘jaggies’ on the sharp corner of this red triangle are mellowed out. What’s happening is that these borders where there is a drastic change in color are smoothed out by a weighted average calculated from the proportion of “mini-pixels” inside the triangle. As this averaging helps the color transition less drastically, an anti-aliasing effect emerges and the overall image quality appears less rough but more crisp.</p>
 
 
