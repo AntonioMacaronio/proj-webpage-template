@@ -126,7 +126,7 @@
                 </td>
                 <td>
                     <img src="part1image8.png" align="middle" width="400px"/>
-                    <figcaption>Varying t value</figcaption>
+                    <figcaption>Varying \(t\) value</figcaption>
                 </td>
             </tr>
         </table>
@@ -138,8 +138,11 @@
         Show a screenshot of a slightly different Bezier curve by moving the original control points around and modifying the parameter \(t\) via mouse scrolling.
     </b>
     <p>
-        YOUR RESPONSE GOES HERE
+        Modified Bezier curve with different \(t\) value:
     </p>
+    <div align="middle">
+        <img src="part1image9.png" align="middle" width="50%">
+    </div>
     <br>
 
 
@@ -148,7 +151,7 @@
         Briefly explain how de Casteljau algorithm extends to Bezier surfaces and how you implemented it in order to evaluate Bezier surfaces.
     </b>
     <p>
-        YOUR RESPONSE GOES HERE
+        Bezier surfaces are 2 dimensional versions of Bezier curve, which means we can use de Casteljau's algorithm to generate Bezier surfaces. Given a grid of points, we can generate a Bezier curve for each row. Then for each of those curves, we can select a select a point along that curve with parameter u. We then run de Casteljau's algorithm again on these new points we’ve obtained, and can generate a final curve with parameter v. In the end, this generates the final surface as we vary u and v.
     </p>
     <br>
 
@@ -157,8 +160,12 @@
         Show a screenshot of bez/teapot.bez (not .dae) evaluated by your implementation.
     </b>
     <p>
-        YOUR RESPONSE GOES HERE
+        Here is our teapot:
     </p>
+    <div align="middle">
+        <img src="part2image1.png" align="middle" width="50%">
+    </div>
+    <br>
     <br>
 
 
@@ -170,7 +177,7 @@
         Briefly explain how you implemented the area-weighted vertex normals.
     </b>
     <p>
-        YOUR RESPONSE GOES HERE
+        To find the area-weighted normal of a vertex, we first iterated through the triangles that share this vertex by using h->twin()->next(). Within each triangle, we found its vertices just by calling next() along the half edge. Once we had the vertices of the triangle, we were easily able to to calculate the the norm vector by using the cross-product, which outputs a vector perpendicular to the triangle with magnitude equal to the doubled area of the triangle. Then, we simply added all these vectors together to get the area-weighted norm of the vertex.
     </p>
     <br>
 
@@ -179,8 +186,23 @@
         Show screenshots of dae/teapot.dae (not .bez) comparing teapot shading with and without vertex normals. Use <kbd>Q</kbd> to toggle default flat shading and Phong shading.
     </b>
     <p>
-        YOUR RESPONSE GOES HERE
+        Here are the screenshots with and without vertex normals:
     </p>
+    <div align="middle">
+        <table style="width:100%">
+            <tr align="center">
+                <td>
+                    <img src="HW 2 Task 3 Diagram 1.png" align="middle" width="400px"/>
+                    <figcaption>With Vertex Normal</figcaption>
+                </td>
+                <td>
+                    <img src="HW 2 Task 3 Diagram 2.png" align="middle" width="400px"/>
+                    <figcaption>Without Vertex Normal</figcaption>
+                </td>
+            </tr>
+            <br>
+        </table>
+    </div>
     <br>
 
 
