@@ -211,7 +211,7 @@
         Briefly explain how you implemented the edge flip operation and describe any interesting implementation / debugging tricks you have used.
     </b>
     <p>
-        YOUR RESPONSE GOES HERE
+        In this section, we implemented flipEdge. To do so, we did a bunch of pointer changes. In particular, we needed to actually flip the edge, which changed which edges belonged to what face, so we assigned this early. Then, we carefully assigned all of the other points, including edge, half-edge and vertex pointers, next, saving the e0->halfedge() and e0->halfedge()->twin() reassignments for last to ensure that we could correctly point to edges correctly.
     </p>
     <br>
 
@@ -244,7 +244,7 @@
         Write about your eventful debugging journey, if you have experienced one.
     </b>
     <p>
-        YOUR RESPONSE GOES HERE The bug is pictured below:
+        We briefly had a hiccup where our face would disappear, but we realized pretty quickly that it was due to stray twin() calls. Due to our careful planning ahead of time, this was our only bug and we got desired results afterwards. The bug is pictured below:
     </p>
     <div align="middle">
         <img src="HW 2 Task 4 Diagram 3.png" align="middle" width="50%">
@@ -257,7 +257,8 @@
         Briefly explain how you implemented the edge split operation and describe any interesting implementation / debugging tricks you have used.
     </b>
     <p>
-        YOUR RESPONSE GOES HERE
+        In this section, we implemented edgeSplit. This required a bunch more objects: 12, in fact, so we made sure to create them early on. Then, we first assigned the face half edges to the outer edges (that weren’t split) as they are the most constant. Next, we assigned the half-edges corresponding to the split. Lastly, we finished by assigning a few outer-halfedge pointers, as well as the original split edge. Drawing a picture here with images and what half edges corresponded to what vertices was super helpful and reduced debugging time drastically. Indeed, our only bug was in an if statement regarding the boundary, which occurred in the extra credit (which we did implement). To do that, another picture was in store, as we had to be super careful: we created a new half-edge that was part of the boundary, for example. The extra credit images are from beetle.dae.
+        (Note that we only provide three screenshots of non-extra credit material because the “before” picture is the same for both)
     </p>
     <br>
 
@@ -308,7 +309,8 @@
         Write about your eventful debugging journey, if you have experienced one.
     </b>
     <p>
-        YOUR RESPONSE GOES HERE
+        Indeed, our only bug was in an if statement regarding the boundary, which occurred in the extra credit (which we did implement). To do that, another picture was in store, as we had to be super careful: we created a new half-edge that was part of the boundary, for example. The extra credit images are from beetle.dae.
+        (Note that we only provide three screenshots of non-extra credit material because the “before” picture is the same for both)
     </p>
     <br>
 
@@ -317,8 +319,23 @@
         If you have implemented support for boundary edges, show screenshots of your implementation properly handling split operations on boundary edges.
     </b>
     <p>
-        YOUR RESPONSE GOES HERE
+        Here is the extra credit for boundary handling:
     </p>
+    <div align="middle">
+        <table style="width:100%">
+            <tr align="center">
+                <td>
+                    <img src="part5ec1.png" align="middle" width="400px"/>
+                    <figcaption>Example 1</figcaption>
+                </td>
+                <td>
+                    <img src="part5ec2.png" align="middle" width="400px"/>
+                    <figcaption>Example 2</figcaption>
+                </td>
+            </tr>
+            <br>
+        </table>
+    </div>
     <br>
 
 
@@ -327,7 +344,7 @@
         Briefly explain how you implemented the loop subdivision and describe any interesting implementation / debugging tricks you have used.
     </b>
     <p>
-        YOUR RESPONSE GOES HERE
+        For part 6, we brought it all together. We followed the suggested strategy of first computing the new positions, then splitting all of the edges (choosing edges to split by the condition that both of the vertices must be old, which was very helpful as it didn’t overload isNew, fixing a bug of ours) and then flipping edges that have one old and one new vertex, before finally reassigning the vertices to their correct positions. We also were able to expand upon our EC from Part 5 to account for boundaries in part 6, as seen by the beetle.dae upscaling.
     </p>
     <br>
 
@@ -440,38 +457,39 @@
         If you have implemented any extra credit extensions, explain what you did and document how they work with screenshots.
     </b>
     <p>
-        YOUR RESPONSE GOES HERE
+        In the process, we had to make sure that we were careful while calculating the new positions of the edges on the boundaries: the new vertices normally take into account the two faces surrounding the corresponding edge, but in this case, there is only one face. For this, we had to use a modified scaling system.
     </p>
+    <div align="middle">
+        <table style="width:100%">
+            <tr align="center">
+                <td>
+                    <img src="part6ec1.png" align="middle" width="400px"/>
+                    <figcaption>Before (1st POV)</figcaption>
+                </td>
+                <td>
+                    <img src="part6ec2.png" align="middle" width="400px"/>
+                    <figcaption>After (1st POV)</figcaption>
+                </td>
+            </tr>
+            <tr align="center">
+                <td>
+                    <img src="part6ec3.png" align="middle" width="400px"/>
+                    <figcaption>Before (2nd POV)</figcaption>
+                </td>
+                <td>
+                    <img src="part6ec4.png" align="middle" width="400px"/>
+                    <figcaption>After (2nd POV)</figcaption>
+                </td>
+            </tr>
+            <br>
+        </table>
+    </div>
+
     <br>
-
-
-    <h3 align="middle">Part 7 (Optional, Possible Extra Credit)</h3>
-    <b>
-        Save your best polygon mesh as partsevenmodel.dae in your docs folder and show us a screenshot of the mesh in your write-up.
-    </b>
+    <br>
     <p>
-        YOUR RESPONSE GOES HERE
+        https://antoniomacaronio.github.io/proj-webpage-template/proj2/index.html
     </p>
-    <br>
-
-
-    <b>
-        Include a series of screenshots showing your original mesh and your mesh after one and two rounds of subdivision. If you have used custom shaders, include screenshots of your mesh with those shaders applied as well.
-    </b>
-    <p>
-        YOUR RESPONSE GOES HERE
-    </p>
-    <br>
-
-
-    <b>
-        Describe what you have done to enhance your mesh beyond the simple humanoid mesh described in the tutorial.
-    </b>
-    <p>
-        YOUR RESPONSE GOES HERE
-    </p>
-    <br>
-
 
 </body>
 </html>
