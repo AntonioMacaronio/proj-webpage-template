@@ -335,9 +335,36 @@
     <b>
         Take some notes, as well as some screenshots, of your observations on how meshes behave after loop subdivision. What happens to sharp corners and edges? Can you reduce this effect by pre-splitting some edges?
     </b>
+
     <p>
-        YOUR RESPONSE GOES HERE
+        Here are some screenshots of the torus. It starts off with very sharp edges and corners, but as we upsample, we can see that the extremely sharp interior is smoothed out. Before it looks like it could give someone a papercut if they stuck their finger inside it, but afterwards it looks like a ring someone can comfortably wear. You can definitely reduce this effect by pre-splitting edges because pre-spliting edges will generate more triangles in that area, which leads to a much less-jagged mesh and overall smoother surface appearance.
     </p>
+    <div align="middle">
+        <table style="width:100%">
+            <tr align="center">
+                <td>
+                    <img src="part6image01.png" align="middle" width="400px"/>
+                    <figcaption>Sharp Hexagon Shape?</figcaption>
+                </td>
+                <td>
+                    <img src="part6image02.png" align="middle" width="400px"/>
+                    <figcaption>After 1 upsample: Sharp and rigid corners/edges are smoother</figcaption>
+                </td>
+            </tr>
+            <tr align="center">
+                <td>
+                    <img src="part6image03.png" align="middle" width="400px"/>
+                    <figcaption>After 2 upsamples: Even more smooth, but an asymmetrical shape is still noticeable.</figcaption>
+                </td>
+                <td>
+                    <img src="part6image04.png" align="middle" width="400px"/>
+                    <figcaption>After 3 upsamples: Very smooth, like a strange golf ball</figcaption>
+                </td>
+            </tr>
+            <br>
+        </table>
+    </div>
+
     <br>
 
 
@@ -345,8 +372,67 @@
         Load dae/cube.dae. Perform several iterations of loop subdivision on the cube. Notice that the cube becomes slightly asymmetric after repeated subdivisions. Can you pre-process the cube with edge flips and splits so that the cube subdivides symmetrically? Document these effects and explain why they occur. Also explain how your pre-processing helps alleviate the effects.
     </b>
     <p>
-        YOUR RESPONSE GOES HERE
+        Yes, you can definitely pre-process the cube with edge splits and flips so that it divides symmetrically. This happens similar to the reasoning aforementioned - by flipping properly, we can have all edges connect to the vertices symmetrically, which means that every vertex has a similar degree (number of edges it connects to), which allows an even number of triangles to be generated there. A similar effect happens with edge splitting - by having each face of the cube start with the same number of edges, we can ensure that the number of new triangles added is evenly distributed about the surface of the original cube, which makes for symmetrical upsampling. This is pictured below, where we upsample the cube without preprocessing and then with preprocessing.
     </p>
+    <div align="middle">
+        <table style="width:100%">
+            <tr align="center">
+                <td>
+                    <img src="part6image11.png" align="middle" width="400px"/>
+                    <figcaption>Cube with sharp corners</figcaption>
+                </td>
+                <td>
+                    <img src="part6image12.png" align="middle" width="400px"/>
+                    <figcaption>After 1 upsample: Sharp and rigid corners/edges are smoother</figcaption>
+                </td>
+            </tr>
+            <tr align="center">
+                <td>
+                    <img src="part6image13.png" align="middle" width="400px"/>
+                    <figcaption>After 2 upsamples: Even more smooth, but an asymmetrical shape is still noticeable.</figcaption>
+                </td>
+                <td>
+                    <img src="part6image14.png" align="middle" width="400px"/>
+                    <figcaption>After 3 upsamples: Very smooth, like a strange golf ball</figcaption>
+                </td>
+            </tr>
+            <br>
+        </table>
+    </div>
+    <p>
+        Here shows the preprocessed cube with a few edge flips and splits which allows it to upsample symmetrically.
+    </p>
+    <div align="middle">
+        <table style="width:100%">
+            <tr align="center">
+                <td>
+                    <img src="part6image21.png" align="middle" width="400px"/>
+                    <figcaption>Cube with preprocessed flips</figcaption>
+                </td>
+                <td>
+                    <img src="part6image22.png" align="middle" width="400px"/>
+                    <figcaption>After 1 upsample</figcaption>
+                </td>
+            </tr>
+            <tr align="center">
+                <td>
+                    <img src="part6image23.png" align="middle" width="400px"/>
+                    <figcaption>After 2 upsamples</figcaption>
+                </td>
+                <td>
+                    <img src="part6image24.png" align="middle" width="400px"/>
+                    <figcaption>After 3 upsamples</figcaption>
+                </td>
+            </tr>
+            <tr align="center">
+                <td>
+                    <img src="part6image25.png" align="middle" width="400px"/>
+                    <figcaption>Another POV - the cube is this symmetrical hexagon shape.</figcaption>
+                </td>
+            </tr>
+            <br>
+        </table>
+    </div>
     <br>
 
 
