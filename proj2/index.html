@@ -344,7 +344,7 @@
         Briefly explain how you implemented the loop subdivision and describe any interesting implementation / debugging tricks you have used.
     </b>
     <p>
-        For part 6, we brought it all together. We followed the suggested strategy of first computing the new positions, then splitting all of the edges (choosing edges to split by the condition that both of the vertices must be old, which was very helpful as it didn’t overload isNew, fixing a bug of ours) and then flipping edges that have one old and one new vertex, before finally reassigning the vertices to their correct positions. We also were able to expand upon our EC from Part 5 to account for boundaries in part 6, as seen by the beetle.dae upscaling.
+        For part 6, we brought it all together. We followed the suggested strategy of first computing the new positions, then splitting all of the edges (choosing edges to split by the condition that both of the vertices must be old, which was very helpful as it didn’t overload isNew, fixing a bug of ours) and then flipping edges that have one old and one new vertex, before finally reassigning the vertices to their correct positions. 
     </p>
     <br>
 
@@ -457,7 +457,7 @@
         If you have implemented any extra credit extensions, explain what you did and document how they work with screenshots.
     </b>
     <p>
-        In the process, we had to make sure that we were careful while calculating the new positions of the edges on the boundaries: the new vertices normally take into account the two faces surrounding the corresponding edge, but in this case, there is only one face. For this, we had to use a modified scaling system.
+        We also were able to expand upon our EC from Part 5 to account for boundaries in part 6, as seen by the beetle.dae upscaling. In the process, we had to make sure that we were careful while calculating the new positions of the edges on the boundaries: the new vertices normally take into account the two faces surrounding the corresponding edge, but in this case, there is only one face. For this, we had to use a modified scaling system.
     </p>
     <div align="middle">
         <table style="width:100%">
